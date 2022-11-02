@@ -1,9 +1,9 @@
 // tuple.cpp 
 
 // MIT License 2022 Robert Shepherd
-#include"size_t.cpp" // yu::size_t
-#include"global_vars.cpp" // yu::globals::tuple_count_g
-#include"errors.cpp" // errors::out_of_bounds_access_t
+#include"Size_t.cpp" // yu::size_t
+#include"Global_vars.cpp" // yu::globals::tuple_count_g
+#include"Errors.cpp" // errors::out_of_bounds_access_t
 
 
 namespace yu
@@ -15,7 +15,7 @@ namespace yu
 		T first;
 		Tuple<Ts...> second;
 
-		template<size_t size>
+		template<Size_t size>
 		friend auto get(auto& t); // auto because cant pass in template parameters
 	};
 
@@ -24,14 +24,14 @@ namespace yu
 	{
 		T first;
 
-		template<size_t size>
+		template<Size_t size>
 		friend auto get(auto& t) // auto because cant pass in template parameters
 	};
 
-	template<size_t size> // definition of Tuple<T>::get(auto& t);
+	template<Size_t size> // definition of Tuple<T>::get(auto& t);
 	auto get(auto& t)
 	{
-		if (size == yu::globals::tuple_count_g)
+		if (size == globals::tuple_count_g)
 		{
 			return t.first;
 		}
@@ -44,8 +44,9 @@ namespace yu
 			}
 			else
 			{
-				throw errors::out_of_bounds_access{"Trying to access index which is more than Tuple size.\n"};
+				throw Errors::out_of_bounds_access{"Trying to access index which is more than Tuple size.\n"};
 			}
 		}
 	}
-}
+} // namespace yu
+
